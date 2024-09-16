@@ -9,12 +9,9 @@ app.use(express.static('public'))
 
 // rutas
 
-// app.get('/', (req, res) => {
-//     // console.log(req.url)
-//     res.json({
-//         ok: true
-//     })
-// })
+// TODO: auth // crear, login, renew
+app.use('/api/auth', require('./routes/auth'))
+// TODO: CRUD: Eventos
 
 
 // Escuchar peticiones
