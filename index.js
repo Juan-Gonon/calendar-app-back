@@ -7,6 +7,9 @@ const port = process.env.PORT
 // dir public
 app.use(express.static('public'))
 
+// Lectura y parse del body
+app.use(express.json())
+
 // rutas
 
 // TODO: auth // crear, login, renew
