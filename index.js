@@ -3,14 +3,17 @@ const express = require('express')
 const app = express()
 const port = 4000
 
+// dir public
+app.use(express.static('public'))
+
 // rutas
 
-app.get('/', (req, res) => {
-    console.log(req.url)
-    res.json({
-        ok: true
-    })
-})
+// app.get('/', (req, res) => {
+//     // console.log(req.url)
+//     res.json({
+//         ok: true
+//     })
+// })
 
 
 // Escuchar peticiones
