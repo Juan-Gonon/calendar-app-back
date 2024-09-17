@@ -1,16 +1,17 @@
 const { response, request } = require('express')
-const { validationResult} = require('express-validator')
+const { userModel } = require('../models/Usuario')
 
-const createUser = (req = request, res = response) => {
+const createUser = async (req = request, res = response) => {
     // console.log(req.url)
-    const { name, email, password } = req.body
+    // const { name, email, password } = req.body
 
+    const user = await userModel.create(req.body)
+    await user.save()
+    console.log(user);
+    
     res.status(201).json({
         ok: true,
-        msg: 'registro',
-        name,
-        email,
-        password
+        msg: 'registro'
     })
 }
 
