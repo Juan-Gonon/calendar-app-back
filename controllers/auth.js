@@ -1,16 +1,21 @@
 const { response, request } = require('express')
+const { validationResult} = require('express-validator')
 
 const createUser = (req = request, res = response) => {
     // console.log(req.url)
     const { name, email, password } = req.body
 
-    if( name.length < 5){
+    const errors = validationResult(req)
+    console.log(errors)
+
+    if( !errors.isEmpty() ){
         return res.status(400).json({
             ok: false,
-            msg: 'El nombre debe ser de 5 letras'
+            errors: errors.mapped()
         })
     }
-    res.json({
+
+    res.status(201).json({
         ok: true,
         msg: 'registro',
         name,
