@@ -7,7 +7,10 @@ const { check } = require('express-validator')
 const router = Router()
 const { createUser, loginUser, revalidateToke } = require('../controllers/auth')
 
-router.post('/',loginUser )
+router.post('/',[
+    check('email', 'El email es obligatorio').isEmail(),
+    check('password', 'El password debe de ser 6 caracteres').isLength({ min: 6})
+],loginUser )
 
 router.post('/new', [
     // middlewares
