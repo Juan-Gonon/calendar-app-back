@@ -7,6 +7,7 @@ const { check } = require('express-validator')
 const { validarCampos } = require('../middlewares/validar-campos')
 const router = Router()
 const { createUser, loginUser, revalidateToke } = require('../controllers/auth')
+const { validarJWT } = require('../middlewares/validar-jwt')
 
 router.post('/',[
     check('email', 'El email es obligatorio').isEmail(),
@@ -22,6 +23,6 @@ router.post('/new', [
     validarCampos
 ] , createUser )
 
-router.get('/renew', revalidateToke )
+router.get('/renew', validarJWT ,revalidateToke )
 
 module.exports = router

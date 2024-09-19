@@ -96,11 +96,15 @@ const loginUser = async (req = request, res = response) => {
    
 }
 
-const revalidateToke = (req = request, res = response) => {
+const revalidateToke = async (req = request, res = response) => {
     // console.log(req.url)
+
+    const { uid, name } = req
+    const token = await generarJWT(uid, name)
+
     res.json({
         ok: true,
-        msg: 'token'
+        token
     })
 }
 
