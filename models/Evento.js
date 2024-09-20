@@ -3,27 +3,28 @@ const { Schema, model } = require('mongoose')
 const eventSchema = new Schema({
     title: {
         type: String,
-        require: true,
+        required: true,
     },
     notes: {
         type: String
     },
     start: {
         type: Date,
-        require: true
+        required: true
     },
     end: {
         type: Date,
-        require: true
+        required: true
     },
     user: {
-        type: Schema.Types.ObjectIdb, // sera referencia
-        ref: 'Usuario'
+        type: Schema.Types.ObjectId, // sera referencia
+        ref: 'Usuario',
+        required: true
     }
 })
 
-const userModel = model('Evento', eventSchema)
+const eventModel = model('Evento', eventSchema)
 
 module.exports = {
-    userModel
+    eventModel
 }
