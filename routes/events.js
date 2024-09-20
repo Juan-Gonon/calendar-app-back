@@ -24,7 +24,12 @@ router.post('/', [
     validarCampos
 
 ] ,createEvents)
-router.put('/:id' ,updateEvents)
+router.put('/:id',[
+    check('title', 'El titulo es obligatorio').notEmpty(),
+    check('start', 'Fecha de inicio es obligatorio').custom(isDate),
+    check('end', 'Fecha de finalización es obligatoria').custom(isDate),
+    validarCampos
+]  ,updateEvents)
 router.delete('/:id' ,deleteEvents)
 
 
