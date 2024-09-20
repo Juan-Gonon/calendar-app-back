@@ -78,14 +78,42 @@ const updateEvents = async (req = request, res = response) => {
     }
 }
 
-const deleteEvents = (req = request, res = response) => {
+const deleteEvents = async (req = request, res = response) => {
     const id = req.params.id
-    
-    res.json({
-        ok: true,
-        msg: 'delete Events',
-        id
-    })
+    const uid = req.uid
+
+    try {
+        const evento = await eventModel.findById(id)
+
+        // console.log(evento);
+        // console.log(uid)
+        if( !evento ) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'Evento no existe por ese id'
+            })
+        }
+
+        if( evento.user.toString() !== uid){
+            return res.status(401).json({ // no autorizado código 401
+                ok: false,
+                msg: 'No tiene privilegios de editar este evento'
+            })
+        }
+        
+       
+        
+        await eventModel.findByIdAndDelete(id)
+
+        res.json({
+            ok: true
+        })
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador!!'
+        })
+    }
 }
 
 
