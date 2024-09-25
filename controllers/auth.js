@@ -104,6 +104,8 @@ const revalidateToke = async (req = request, res = response) => {
 
     res.json({
         ok: true,
+        uid,
+        name,
         token
     })
 }
